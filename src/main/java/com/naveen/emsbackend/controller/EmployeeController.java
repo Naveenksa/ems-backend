@@ -1,7 +1,6 @@
 package com.naveen.emsbackend.controller;
 
-import com.naveen.emsbackend.dto.EmployeeDto;
-import com.naveen.emsbackend.entity.Employee;
+import com.naveen.emsbackend.dto.EmployeeDTO;
 import com.naveen.emsbackend.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,41 +12,40 @@ import java.util.List;
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/employess")
+@RequestMapping("/api/employees")
 public class EmployeeController {
 
     private EmployeeService employeeService;
 
-    //Build Add Emps to Rest api
     @PostMapping()
-    public ResponseEntity<EmployeeDto> createEmp(@RequestBody EmployeeDto employeeDto) {
-        EmployeeDto savedempsdto = employeeService.creatEmployee(employeeDto);
-        return new ResponseEntity<>(savedempsdto, HttpStatus.CREATED);
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        EmployeeDTO savedEmployeeDTO = employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(savedEmployeeDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmp(@PathVariable("id") Long empid) {
-        EmployeeDto employeeDto = employeeService.getEmpById(empid);
-        return ResponseEntity.ok(employeeDto);
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Long employeeId) {
+        EmployeeDTO employeeDTO = employeeService.getEmployee(employeeId);
+        return ResponseEntity.ok(employeeDTO);
     }
 
     @GetMapping()
-    public ResponseEntity<List<EmployeeDto>> getAllEmps() {
-        List<EmployeeDto> employees = employeeService.getAllEmps();
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok(employees);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployeeDto> updateEmpById(@PathVariable Long id,
-                                                     @RequestBody EmployeeDto updatedEmp)
+    @PutMapping("/{employeeId}")
+    public ResponseEntity<EmployeeDTO> updateEmpById(@PathVariable Long employeeId,
+                                                     @RequestBody EmployeeDTO employeeDTO)
     {
-        EmployeeDto empUpdated = employeeService.upDateEmployee(id, updatedEmp);
-        return ResponseEntity.ok(empUpdated);
+        EmployeeDTO updatedEmployee = employeeService.updateEmployee(employeeId, employeeDTO);
+        return ResponseEntity.ok(updatedEmployee);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmp(@PathVariable("id") Long empid){
-        employeeService.deleteEmps(empid);
-        return ResponseEntity.ok("emp deteled with id "+empid);
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long employeeId){
+        employeeService.deleteEmployee(employeeId);
+        return ResponseEntity.ok("Employee deleted with id %s".formatted(employeeId));
     }
 }

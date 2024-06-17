@@ -1,13 +1,13 @@
 package com.naveen.emsbackend.mapper;
 
-import com.naveen.emsbackend.dto.EmployeeDto;
+import com.naveen.emsbackend.dto.EmployeeDTO;
 import com.naveen.emsbackend.entity.Employee;
 
 public class EmployeeMapper {
 
-    public static EmployeeDto mapToEmpoyeeDto(Employee employee) {
+    public static EmployeeDTO mapToEmpoyeeDto(Employee employee) {
 
-        return new EmployeeDto(
+        return new EmployeeDTO(
                 employee.getId(),
                 employee.getFirstName(),
                 employee.getLastName(),
@@ -15,7 +15,7 @@ public class EmployeeMapper {
         );
     }
 
-    public static Employee mapToEmp(EmployeeDto employeeDto) {
+    public static Employee mapToEmp(EmployeeDTO employeeDto) {
         return new Employee(
                 employeeDto.getId(),
                 employeeDto.getFirstName(),

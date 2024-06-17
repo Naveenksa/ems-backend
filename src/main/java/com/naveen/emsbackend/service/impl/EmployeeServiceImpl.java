@@ -1,6 +1,6 @@
 package com.naveen.emsbackend.service.impl;
 
-import com.naveen.emsbackend.dto.EmployeeDto;
+import com.naveen.emsbackend.dto.EmployeeDTO;
 import com.naveen.emsbackend.entity.Employee;
 import com.naveen.emsbackend.exception.ResourceNotFoundException;
 import com.naveen.emsbackend.mapper.EmployeeMapper;
@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public EmployeeDto creatEmployee(EmployeeDto employeeDto) {
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDto) {
 
         Employee employee = EmployeeMapper.mapToEmp(employeeDto);
         Employee savedemp = employeeRepository.save(employee);
@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getEmpById(Long empId) {
+    public EmployeeDTO getEmployee(Long empId) {
 
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee is not not by given id :_  " + empId));
@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> getAllEmps() {
+    public List<EmployeeDTO> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         return employees.stream()
                 .map((emps) -> EmployeeMapper.mapToEmpoyeeDto(emps))
@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto upDateEmployee(Long empId, EmployeeDto updatedEmps) {
+    public EmployeeDTO updateEmployee(Long empId, EmployeeDTO updatedEmps) {
 
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new ResourceNotFoundException("employe not exist for given id:-" + empId));
@@ -60,10 +60,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmps(Long empId) {
-        Employee employee = employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("employe not exist for given id:-" + empId));
-        employeeRepository.deleteById(empId);
+    public void deleteEmployee(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("employe not exist for given id:-" + employeeId));
+        employeeRepository.deleteById(employeeId);
     }
 
 }

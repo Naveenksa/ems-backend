@@ -1,19 +1,19 @@
 package com.naveen.emsbackend.service;
 
-import com.naveen.emsbackend.dto.EmployeeDto;
+import com.naveen.emsbackend.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeDto creatEmployee(EmployeeDto employeeDto);
+    EmployeeDTO createEmployee(EmployeeDTO employeeDto);
 
-    EmployeeDto getEmpById(Long empId);
+    EmployeeDTO getEmployee(Long empId);
 
-    List<EmployeeDto> getAllEmps();
+    List<EmployeeDTO> getAllEmployees();
 
-    EmployeeDto upDateEmployee(Long empId,EmployeeDto updatedEmps);
+    EmployeeDTO updateEmployee(Long empId, EmployeeDTO updatedEmps);
 
-    void deleteEmps(Long empsId);
+    void deleteEmployee(Long employeeId);
 
 }
